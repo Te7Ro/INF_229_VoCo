@@ -11,3 +11,4 @@ import com.example.kinopoisk.data.BottomNavGraph
 fun HomePage() {
 }
 
+data class MovieItem(val title: String, val image: Int)
