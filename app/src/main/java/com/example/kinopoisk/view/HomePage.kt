@@ -11,4 +11,23 @@ import com.example.kinopoisk.data.BottomNavGraph
 fun HomePage() {
 }
 
-data class MovieItem(val title: String, val image: Int)
+data class MovieItem(val image: Int, val title: String, val genre: String)
+
+val premierMovies = listOf(
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+)
+val popularMovies = listOf(
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+)
+val actionMoviesUSA = listOf(
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+    MovieItem(R.drawable.movie, "Близкие", "драма")
+)
