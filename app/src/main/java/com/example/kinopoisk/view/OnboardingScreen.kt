@@ -26,7 +26,7 @@ fun OnboardingScreen() {
                 title = {
                     Text(
                         text = "Skillcinema",
-                        fontSize = 23.sp,
+                        fontSize = 28.sp,
                         fontWeight = FontWeight.Light
                     )
                 },

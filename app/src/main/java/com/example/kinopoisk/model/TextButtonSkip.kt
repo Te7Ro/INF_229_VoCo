@@ -8,7 +8,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.kinopoisk.ui.theme.Grey
 
@@ -23,7 +22,6 @@ fun TextButtonSkip(text : String, onClick : () -> Unit){
             },
         text = text,
         fontSize = 16.sp,
-        color = Grey,
-        fontWeight = FontWeight.Light
+        color = Grey
     )
 }
