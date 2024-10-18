@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.kinopoisk.ui.theme.KinopoiskTheme
 import com.example.kinopoisk.view.MainScreen
+import com.example.kinopoisk.view.OnboardingScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KinopoiskTheme {
-                MainScreen()
+                OnboardingScreen()
             }
         }
     }
