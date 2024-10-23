@@ -1,4 +1,4 @@
-package com.example.kinopoisk.Modeli
+package com.example.kinopoisk.model
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

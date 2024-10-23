@@ -1,4 +1,4 @@
-package com.example.kinopoisk.screen
+package com.example.kinopoisk.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kinopoisk.Modeli.SpisokView
-import com.example.kinopoisk.Modeli.TitleAll
+import com.example.kinopoisk.model.SpisokView
+import com.example.kinopoisk.model.TitleAll
 import com.example.kinopoisk.data.Data
 
 @Preview(showBackground = true)

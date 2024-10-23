@@ -1,4 +1,4 @@
-package com.example.kinopoisk.Modeli
+package com.example.kinopoisk.model
 
 import com.example.kinopoisk.R
 

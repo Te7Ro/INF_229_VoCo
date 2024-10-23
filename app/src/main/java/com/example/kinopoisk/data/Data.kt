@@ -1,7 +1,7 @@
 package com.example.kinopoisk.data
 
-import com.example.kinopoisk.Modeli.Items
-import com.example.kinopoisk.Modeli.Spisok
+import com.example.kinopoisk.model.Items
+import com.example.kinopoisk.model.Spisok
 
 object Data{
     val list = listOf(
