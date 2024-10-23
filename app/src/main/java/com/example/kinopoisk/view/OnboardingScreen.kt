@@ -14,11 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.kinopoisk.model.OnboardingPager
 import com.example.kinopoisk.model.TextButtonSkip
+import com.example.kinopoisk.data.MainNavigationItems
 
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(navController: NavHostController) {
     Scaffold(
         modifier = Modifier.fillMaxSize().padding(26.dp),
         topBar = {
@@ -31,7 +33,9 @@ fun OnboardingScreen() {
                     )
                 },
                 actions = {
-                    TextButtonSkip("Пропустить", onClick = {})
+                    TextButtonSkip("Пропустить", onClick = {
+                        navController.navigate(MainNavigationItems.MainScreen.route)
+                    })
                 }
             )
         }

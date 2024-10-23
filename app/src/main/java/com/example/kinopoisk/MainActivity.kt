@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.kinopoisk.data.MainNavGraph
 import com.example.kinopoisk.ui.theme.KinopoiskTheme
 import com.example.kinopoisk.view.MainScreen
 import com.example.kinopoisk.view.OnboardingScreen
@@ -22,7 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KinopoiskTheme {
-                OnboardingScreen()
+                val navController = rememberNavController()
+                MainNavGraph(navController)
             }
         }
     }
