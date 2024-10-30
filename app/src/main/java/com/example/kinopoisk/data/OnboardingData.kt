@@ -1,14 +1,15 @@
 package com.example.kinopoisk.data
 
+import androidx.annotation.DrawableRes
 import com.example.kinopoisk.R
 
 
 data class OnboardingData(
-    val image: Int,
+    @DrawableRes val image: Int,
     val desc: String
 )
 
-val onboardingPagesFromData = listOf<OnboardingData>(
+val onboardingPagesFromData = listOf(
     OnboardingData(
         R.drawable.onboarding1,
         "Узнавай о премьерах"
