@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,15 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
+import com.example.kinopoisk.data.Movie
 
 @Composable
 fun SpisokView(
-    data: Items,
+    movie: Movie,
 ){
     Box(
         modifier = Modifier
@@ -40,12 +43,14 @@ fun SpisokView(
                         .clip(RoundedCornerShape(5.dp))
                         .width(111.dp)
                         .height(156.dp),
-                    painter = painterResource(id = data.Image),
+                    painter = rememberImagePainter(
+                        data = movie.posterUrlPreview,
+                    ),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                 )
                 Text(
-                    text = data.Rating,
+                    text = movie.ratingKinopoisk.toString(),
                     fontSize = 6.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
@@ -59,16 +64,19 @@ fun SpisokView(
 
             Text(
                 modifier = Modifier
-                    .padding(top = 2.dp),
-                text = data.Name,
+                    .padding(top = 2.dp)
+                    .widthIn(max = 108.dp),
+                text = movie.nameRu,
                 style = TextStyle(
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp,
                     color = Color.Black
-                )
+                ),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = data.Genre,
+                text = movie.genres.get(0).genre,
                 style = TextStyle(
                     fontSize = 12.sp,
                     color = Color.Gray

@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
-import com.example.kinopoisk.model.ScreenStateUi
 import com.example.kinopoisk.view.OnboardingScreen
 import com.example.kinopoisk.view.MainScreen
 

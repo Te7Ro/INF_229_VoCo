@@ -1,25 +1,28 @@
 package com.example.kinopoisk.network
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
+import com.example.kinopoisk.data.Collection
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.Query
 
-private const val BASE_URL = "https://kinopoiskapiunofficial.tech/documentation/api/"
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-    .baseUrl(BASE_URL)
-    .build()
+private const val BASE_URL = "https://kinopoiskapiunofficial.tech/"
+private const val API_KEY = "8909a38d-6c1f-4669-916e-306963c06cb6"
 
 interface KinopoiskApiService{
-    @GET("shtoto")
-    suspend fun getShtoto() : String
+
+    @Headers("X-API-KEY: $API_KEY")
+    @GET("/api/v2.2/films/collections")
+    suspend fun getCollection(@Query("type") type: String) : Collection
 }
 
 object KinopoiskApi {
-    val retrofitService : KinopoiskApiService by lazy {
-        retrofit.create(KinopoiskApiService::class.java)
+    val api : KinopoiskApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(KinopoiskApiService::class.java)
     }
 }
