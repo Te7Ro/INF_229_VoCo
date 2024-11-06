@@ -44,12 +44,14 @@ fun BottomNavigationBar(
                 selected = item.route == currentRoute,
                 onClick = {onItemClick(item)},
                 icon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(item.icon),
-                        contentDescription = "",
-                        modifier = Modifier.size(24.dp)
-                            .align(Alignment.CenterVertically)
-                    )
+                    item.icon?.let {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(item.icon),
+                            contentDescription = "",
+                            modifier = Modifier.size(24.dp)
+                                .align(Alignment.CenterVertically)
+                        )
+                    }
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,

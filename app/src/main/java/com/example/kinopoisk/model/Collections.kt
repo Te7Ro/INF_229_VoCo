@@ -6,36 +6,23 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.kinopoisk.data.Collection
 import com.example.kinopoisk.data.Movie
 
 @Composable
-fun Collections(type: String, collection: Collection)
+fun Collections(type: String, collection: Collection, navController: NavHostController)
 {
-    var title = ""
-    when(type){
-        "TOP_POPULAR_ALL" -> title = "Популярное"
-        "ZOMBIE_THEME" -> title = "Зомби"
-        "FAMILY" -> title = "Семейное"
-    }
-    TitleAll(title)
-    ShowFilm(collection.items)
+    TitleAll(type, navController)
+    ShowFilm(collection.items, navController)
 }
 @Composable
-fun ShowFilm(movies : List<Movie>)
+fun ShowFilm(movies : List<Movie>, navController: NavHostController)
 {
     LazyRow(modifier = Modifier.padding(bottom = 20.dp)){
         items(movies)
         {
-            movie -> SpisokView(movie = movie)
+            movie -> SpisokView(movie = movie, navController)
         }
     }
 }
-
-/*
-TOP_POPULAR_ALL
-
-ZOMBIE_THEME
-
-FAMILY
- */

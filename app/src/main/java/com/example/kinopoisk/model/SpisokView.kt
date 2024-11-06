@@ -2,6 +2,7 @@ package com.example.kinopoisk.model
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,16 +23,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.example.kinopoisk.data.Movie
+import com.example.kinopoisk.R
+import com.example.kinopoisk.data.BottomNavigationItems
 
 @Composable
 fun SpisokView(
     movie: Movie,
+    navController: NavHostController
 ){
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { navController.navigate(BottomNavigationItems.FilmDetail.route) }
     ){
         Column(
             modifier = Modifier
@@ -45,6 +51,9 @@ fun SpisokView(
                         .height(156.dp),
                     painter = rememberImagePainter(
                         data = movie.posterUrlPreview,
+                        builder = {
+                            error(R.drawable.img)
+                        }
                     ),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
