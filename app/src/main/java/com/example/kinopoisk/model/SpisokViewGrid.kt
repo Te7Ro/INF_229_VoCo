@@ -5,11 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +30,7 @@ import com.example.kinopoisk.data.BottomNavigationItems
 
 @ExperimentalCoilApi
 @Composable
-fun SpisokView(
+fun SpisokViewGrid(
     movie: Movie,
     navController: NavHostController
 ){
@@ -43,14 +41,14 @@ fun SpisokView(
     ){
         Column(
             modifier = Modifier
-                .padding(end = 9.dp)
+                .fillMaxWidth()
         ) {
             Box {
                 Image(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .clip(RoundedCornerShape(5.dp))
-                        .width(111.dp)
-                        .height(156.dp),
+                        .aspectRatio(0.71f),
                     painter = rememberImagePainter(
                         data = movie.posterUrlPreview,
                         builder = {
@@ -75,8 +73,8 @@ fun SpisokView(
 
             Text(
                 modifier = Modifier
-                    .padding(top = 2.dp)
-                    .widthIn(max = 108.dp),
+                    .fillMaxWidth()
+                    .padding(top = 2.dp),
                 text = movie.nameRu,
                 style = TextStyle(
                     fontWeight = FontWeight.Medium,

@@ -52,7 +52,7 @@ fun HomePage(
                         text = "Skillcinema",
                         fontSize = 30.sp
                     )
-                    LazyColumn (modifier = Modifier.padding(top = 65.dp)){
+                    LazyColumn (modifier = Modifier.padding(top = 55.dp)){
                         items (types) { type ->
                             val collections = collectionMap.getValue(type)
                             Collections(type, collections, navController)

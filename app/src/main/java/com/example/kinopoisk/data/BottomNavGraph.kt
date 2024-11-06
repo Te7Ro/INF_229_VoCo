@@ -2,8 +2,10 @@ package com.example.kinopoisk.data
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType.Companion.StringType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.kinopoisk.R
 import com.example.kinopoisk.view.CollectionPage
 import com.example.kinopoisk.view.FilmDetail
@@ -28,11 +30,11 @@ sealed class BottomNavigationItems (
         icon = R.drawable.profile_icon
     )
     object CollectionPage : BottomNavigationItems(
-        route = "collectionPage",
+        route = "collectionPage/{type}",
         icon = null
     )
     object FilmDetail : BottomNavigationItems(
-        route = "filmDetal",
+        route = "filmDetail",
         icon = null
     )
 }
@@ -52,8 +54,12 @@ fun BottomNavGraph(navController: NavHostController){
         composable(BottomNavigationItems.Profile.route){
             Profile()
         }
-        composable(BottomNavigationItems.CollectionPage.route){
-            CollectionPage(navController)
+        composable(
+            route = BottomNavigationItems.CollectionPage.route,
+            arguments = listOf(navArgument("type"){ type = StringType })
+        ){
+            backStackEntry -> val type = backStackEntry.arguments?.getString("type") ?: "TOP_POPULAR_ALL"
+            CollectionPage(navController = navController, type = type)
         }
         composable(BottomNavigationItems.FilmDetail.route){
             FilmDetail()

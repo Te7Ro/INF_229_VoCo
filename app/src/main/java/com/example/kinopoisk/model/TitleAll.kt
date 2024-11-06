@@ -43,7 +43,7 @@ fun TitleAll(type: String, navController: NavHostController){
         )
         Text(
             modifier = Modifier.clickable {
-                navController.navigate(BottomNavigationItems.CollectionPage.route)
+                navController.navigate("collectionPage/$type")
             },
             text = "Все",
             fontSize = 14.sp,
