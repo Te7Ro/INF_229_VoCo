@@ -12,34 +12,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.kinopoisk.data.FilmViewModel
-import com.example.kinopoisk.data.ScreenState
+import com.example.kinopoisk.data.CollectionViewModel
+import com.example.kinopoisk.data.CollectionScreenState
 import com.example.kinopoisk.model.ListPage
 
 @Composable
 fun CollectionPage(navController: NavHostController, type: String) {
-    val viewModel: FilmViewModel = viewModel()
+    val viewModel: CollectionViewModel = viewModel()
     val screenState by viewModel.screenState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (screenState) {
-            is ScreenState.Initial -> {
+            is CollectionScreenState.Initial -> {
                 viewModel.fetchCollections(listOf(type))
             }
 
-            is ScreenState.Loading -> {
+            is CollectionScreenState.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
 
-            is ScreenState.Error -> {
-                val message = (screenState as ScreenState.Error).message
+            is CollectionScreenState.Error -> {
+                val message = (screenState as CollectionScreenState.Error).message
                 Text(text = message)
             }
 
-            is ScreenState.Success -> {
-                val collection = (screenState as ScreenState.Success).collections[type]
+            is CollectionScreenState.Success -> {
+                val collection = (screenState as CollectionScreenState.Success).collections[type]
                 collection?.let {
                     ListPage(navController, it.items, type)
                 }

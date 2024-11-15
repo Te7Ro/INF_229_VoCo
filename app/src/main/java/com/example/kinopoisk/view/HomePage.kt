@@ -17,14 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.kinopoisk.data.FilmViewModel
-import com.example.kinopoisk.data.ScreenState
+import com.example.kinopoisk.data.CollectionScreenState
+import com.example.kinopoisk.data.CollectionViewModel
 import com.example.kinopoisk.model.Collections
 
 @Composable
 fun HomePage(
-    viewModel: FilmViewModel = viewModel(),
-    navController: NavHostController
+    viewModel: CollectionViewModel = viewModel(),
+    navController: NavHostController,
 ){
 
     val screenState by viewModel.screenState.collectAsState()
@@ -33,20 +33,20 @@ fun HomePage(
 
     Box(modifier = Modifier.fillMaxSize()){
         when (screenState) {
-            is ScreenState.Initial -> {
+            is CollectionScreenState.Initial -> {
                 viewModel.fetchCollections(types)
             }
-            is ScreenState.Loading -> {
+            is CollectionScreenState.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
-            is ScreenState.Error -> {
-                val message = (screenState as ScreenState.Error).message
+            is CollectionScreenState.Error -> {
+                val message = (screenState as CollectionScreenState.Error).message
                 Text(text = message)
             }
-            is ScreenState.Success -> {
-                val collectionMap = (screenState as ScreenState.Success).collections
+            is CollectionScreenState.Success -> {
+                val collectionMap = (screenState as CollectionScreenState.Success).collections
                 Column (modifier = Modifier.padding(start = 26.dp, top = 97.dp)){
                     Text(
                         text = "Skillcinema",
