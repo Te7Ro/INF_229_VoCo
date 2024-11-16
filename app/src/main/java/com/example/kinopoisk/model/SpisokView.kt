@@ -26,14 +26,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.example.kinopoisk.data.Movie
 import com.example.kinopoisk.R
 import com.example.kinopoisk.data.BottomNavigationItems
+import com.example.kinopoisk.data.MovieCollection
 
 @ExperimentalCoilApi
 @Composable
 fun SpisokView(
-    movie: Movie,
+    movie: MovieCollection,
     navController: NavHostController
 ){
     Box(

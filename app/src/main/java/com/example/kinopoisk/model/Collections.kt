@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import com.example.kinopoisk.data.Collection
-import com.example.kinopoisk.data.Movie
+import com.example.kinopoisk.data.MovieCollection
 
 @Composable
 fun Collections(type: String, collection: Collection, navController: NavHostController)
@@ -28,7 +28,7 @@ fun Collections(type: String, collection: Collection, navController: NavHostCont
 
 
 @Composable
-fun ShowFilm(movies : List<Movie>, navController: NavHostController)
+fun ShowFilm(movies : List<MovieCollection>, navController: NavHostController)
 {
     LazyRow(modifier = Modifier.padding(bottom = 20.dp)){
         items(movies)
@@ -39,7 +39,7 @@ fun ShowFilm(movies : List<Movie>, navController: NavHostController)
 }
 
 @Composable
-fun ShowFilmGrid(movies: List<Movie>, navController: NavHostController) {
+fun ShowFilmGrid(movies: List<MovieCollection>, navController: NavHostController) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier

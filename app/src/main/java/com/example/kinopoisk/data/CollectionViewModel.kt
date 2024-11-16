@@ -13,6 +13,7 @@ sealed interface CollectionScreenState {
     data class Error(val message: String) : CollectionScreenState
     data class Success(val collections: Map<String, Collection>) : CollectionScreenState
 }
+
 class CollectionViewModel : ViewModel() {
     private val _screenState = MutableStateFlow<CollectionScreenState>(CollectionScreenState.Initial)
     val screenState : StateFlow<CollectionScreenState> = _screenState

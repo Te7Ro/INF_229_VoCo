@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kinopoisk.data.BottomNavigationItems
-import com.example.kinopoisk.data.Collection
 
 @Composable
 fun TitleAll(type: String, navController: NavHostController){
