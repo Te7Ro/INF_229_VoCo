@@ -2,6 +2,7 @@ package com.example.kinopoisk.data
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.NavType.Companion.StringType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,6 +10,7 @@ import androidx.navigation.navArgument
 import com.example.kinopoisk.R
 import com.example.kinopoisk.view.CollectionPage
 import com.example.kinopoisk.view.FilmDetail
+import com.example.kinopoisk.view.FilmographyPage
 import com.example.kinopoisk.view.HomePage
 import com.example.kinopoisk.view.Profile
 import com.example.kinopoisk.view.Search
@@ -64,5 +66,12 @@ fun BottomNavGraph(navController: NavHostController){
         composable(BottomNavigationItems.FilmDetail.route){
             FilmDetail()
         }
+        composable(
+                route = "actorFilmography/{actorId}",
+        arguments = listOf(navArgument("actorId") { type = NavType.IntType })
+        ) { backStackEntry ->
+        val actorId = backStackEntry.arguments?.getInt("actorId") ?: 0
+        FilmographyPage(actorId = actorId, navController = navController)
+    }
     }
 }

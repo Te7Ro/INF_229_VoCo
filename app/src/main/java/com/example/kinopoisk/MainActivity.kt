@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.kinopoisk.data.MainNavGraph
 import com.example.kinopoisk.ui.theme.KinopoiskTheme
-import com.example.kinopoisk.view.FilmPage
-import com.example.kinopoisk.view.Gallery
+import com.example.kinopoisk.view.ActorPage
+import com.example.kinopoisk.view.FilmographyPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +16,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KinopoiskTheme {
-                Gallery()
+                val navController = rememberNavController()
+                MainNavGraph(navController)
             }
         }
     }
