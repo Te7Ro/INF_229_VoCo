@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoilApi::class)
+
 package com.example.kinopoisk.model
 
 import androidx.compose.foundation.Image
@@ -30,7 +32,7 @@ import com.example.kinopoisk.R
 import com.example.kinopoisk.data.BottomNavigationItems
 import com.example.kinopoisk.data.MovieCollection
 
-@ExperimentalCoilApi
+
 @Composable
 fun SpisokView(
     movie: MovieCollection,
