@@ -33,7 +33,6 @@ class ActorMovieViewModel : ViewModel() {
                     try {
                         KinopoiskApi.api.getMovie(film.filmId)
                     } catch (e: Exception) {
-                        Log.e("ActorMovieViewModel", "Failed to fetch movie with id: ${film.filmId}", e)
                         null
                     }
                 }
