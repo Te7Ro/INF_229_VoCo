@@ -51,3 +51,29 @@ fun TitleAll(type: String, navController: NavHostController){
             )
     }
 }
+@Composable
+fun TitleNum(title: String){
+    Row (modifier = Modifier.fillMaxWidth()
+        .padding(vertical = 12.dp)
+        .padding(end = 26.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    )
+    {
+        Text(
+            text = title,
+            fontSize = 18.sp,
+            style = TextStyle(
+                fontWeight = FontWeight.Bold
+            )
+
+        )
+        Text(
+            modifier = Modifier.clickable {
+            },
+            text = "27 >",
+            fontSize = 14.sp,
+            color = Color(0xFF3D3BFF)
+        )
+    }
+}
