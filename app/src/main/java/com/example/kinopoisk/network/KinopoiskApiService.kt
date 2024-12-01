@@ -14,7 +14,14 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://kinopoiskapiunofficial.tech/"
-private const val API_KEY = "8909a38d-6c1f-4669-916e-306963c06cb6"
+private const val API_KEY = "c989cd9a-7b96-4cc9-aa4f-1a9b4dff8938"
+
+/*
+API keys
+8909a38d-6c1f-4669-916e-306963c06cb6
+c989cd9a-7b96-4cc9-aa4f-1a9b4dff8938
+9908ddd8-b8ed-4087-930c-f39e37fe165e
+ */
 
 interface KinopoiskApiService{
 
@@ -24,23 +31,23 @@ interface KinopoiskApiService{
 
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v2.2/films/{id}/similars")
-    suspend fun getSimilars(@Path("id") Id: Int) : Similar
+    suspend fun getSimilars(@Path("id") id: Int) : Similar
 
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v2.2/films/{id}")
-    suspend fun getMovie(@Path("id") Id: Int) : MovieDetailed
+    suspend fun getMovie(@Path("id") id: Int) : MovieDetailed
 
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v1/staff")
-    suspend fun getMovieActors(@Query("id") Id: Int) : MovieActor
+    suspend fun getMovieActors(@Query("id") id: Int) : MovieActor
 
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v1/staff/{id}")
-    suspend fun getActor(@Path("id") Id: Int) : ActorDetailed
+    suspend fun getActor(@Path("id") id: Int) : ActorDetailed
 
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v2.2/films/{id}/images")
-    suspend fun getGallery(@Path("id") Id: Int, @Query("type") type: String) : Gallery
+    suspend fun getGallery(@Path("id") id: Int, @Query("type") type: String) : Gallery
 
 }
 

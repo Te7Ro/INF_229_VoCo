@@ -17,8 +17,8 @@ data class MovieCollection(
 
 data class MovieDetailed(
     val kinopoiskId: Int,
-    val kinopoiskHDId: Int,
-    val imdbId: Int,
+    val kinopoiskHDId: String,
+    val imdbId: String,
     val nameRu: String,
     val nameEn: String,
     val nameOriginal: String,

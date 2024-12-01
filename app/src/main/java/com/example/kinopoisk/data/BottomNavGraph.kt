@@ -3,6 +3,7 @@ package com.example.kinopoisk.data
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
+import androidx.navigation.NavType.Companion.IntType
 import androidx.navigation.NavType.Companion.StringType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,6 +11,7 @@ import androidx.navigation.navArgument
 import com.example.kinopoisk.R
 import com.example.kinopoisk.view.CollectionPage
 import com.example.kinopoisk.view.FilmDetail
+import com.example.kinopoisk.view.FilmPage
 import com.example.kinopoisk.view.FilmographyPage
 import com.example.kinopoisk.view.HomePage
 import com.example.kinopoisk.view.Profile
@@ -35,8 +37,8 @@ sealed class BottomNavigationItems (
         route = "collectionPage/{type}",
         icon = null
     )
-    object FilmDetail : BottomNavigationItems(
-        route = "filmDetail",
+    object FilmPage : BottomNavigationItems(
+        route = "filmPage/{movie_id}",
         icon = null
     )
 }
@@ -63,15 +65,19 @@ fun BottomNavGraph(navController: NavHostController){
             backStackEntry -> val type = backStackEntry.arguments?.getString("type") ?: "TOP_POPULAR_ALL"
             CollectionPage(navController = navController, type = type)
         }
-        composable(BottomNavigationItems.FilmDetail.route){
-            FilmDetail()
+        composable(
+            route = BottomNavigationItems.FilmPage.route,
+            arguments = listOf(navArgument("movie_id"){type = IntType})
+        ){
+            backStackEntry -> val movie_id = backStackEntry.arguments?.getInt("movie_id") ?: 1
+            FilmPage(id = movie_id, navController)
         }
         composable(
                 route = "actorFilmography/{actorId}",
-        arguments = listOf(navArgument("actorId") { type = NavType.IntType })
-        ) { backStackEntry ->
-        val actorId = backStackEntry.arguments?.getInt("actorId") ?: 0
-        FilmographyPage(actorId = actorId, navController = navController)
-    }
+            arguments = listOf(navArgument("actorId") { type = NavType.IntType })
+        ) {
+            backStackEntry -> val actorId = backStackEntry.arguments?.getInt("actorId") ?: 0
+            FilmographyPage(actorId = actorId, navController = navController)
+        }
     }
 }

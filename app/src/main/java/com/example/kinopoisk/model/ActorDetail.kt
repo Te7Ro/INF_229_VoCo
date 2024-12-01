@@ -152,7 +152,7 @@ fun SpisokViewActor(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { navController.navigate(BottomNavigationItems.FilmDetail.route) }
+            .clickable { navController.navigate("filmPage/${movie.kinopoiskId}") }
     ){
         Column(
             modifier = Modifier
