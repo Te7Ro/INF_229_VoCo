@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.kinopoisk.data.BottomNavigationItems
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun TitleAll(type: String, navController: NavHostController){
@@ -70,7 +70,7 @@ fun TitleNum(title: String, num: Int){
         Text(
             modifier = Modifier.clickable {
             },
-            text = num.toString()+" >",
+            text = num.toString() +" >",
             fontSize = 14.sp,
             color = Color(0xFF3D3BFF)
         )

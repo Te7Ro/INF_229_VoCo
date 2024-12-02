@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
@@ -29,7 +30,8 @@ import com.example.kinopoisk.data.MovieCollection
 import com.example.kinopoisk.R
 
 @Composable
-fun StoryView(movies : List<MovieCollection>, navController: NavHostController){
+fun StoryView(movies : List<MovieCollection>, navController: NavHostController,
+              total: MutableState<Int>){
     val items = remember { movies.toMutableStateList() }
     LazyRow (
         Modifier.fillMaxWidth().height(190.dp)
@@ -43,6 +45,7 @@ fun StoryView(movies : List<MovieCollection>, navController: NavHostController){
                 modifier = Modifier.width(111.dp).fillMaxHeight()
                     .clickable {
                         items.clear()
+                        total.value = 0
                     },
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally

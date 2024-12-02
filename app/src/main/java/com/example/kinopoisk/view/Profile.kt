@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.kinopoisk.model.ProfileCollections
 import com.example.kinopoisk.model.TitleNum
 import com.example.kinopoisk.model.Watched
 
@@ -22,5 +23,6 @@ fun Profile(
             .padding(start = 26.dp, top = 56.dp)
     ){
         Watched(navHostController = navHostController)
+        ProfileCollections()
     }
 }

@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.kinopoisk.data.CollectionScreenState
 import com.example.kinopoisk.data.MovieScreenState
 import com.example.kinopoisk.data.MovieViewModel
 import com.example.kinopoisk.model.ActorRow
@@ -25,6 +24,7 @@ import com.example.kinopoisk.model.FilmDescriptionView
 import com.example.kinopoisk.model.FilmHeaderView
 import com.example.kinopoisk.model.GaleryView
 import com.example.kinopoisk.model.TitleNum
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun FilmPage(
@@ -60,7 +60,7 @@ fun FilmPage(
                     ) {
                         items(1){
                             FilmDescriptionView()
-                            TitleNum("Galery",27)
+                            TitleNum("Galery", 27)
                             GaleryView()
                             TitleNum("Гей порнография",27)
                             ActorRow()
