@@ -53,10 +53,10 @@ fun BottomNavGraph(navController: NavHostController){
             HomePage(navController = navController)
         }
         composable(BottomNavigationItems.Search.route){
-            Search()
+            Search(navController)
         }
         composable(BottomNavigationItems.Profile.route){
-            Profile()
+            Profile(navController)
         }
         composable(
             route = BottomNavigationItems.CollectionPage.route,

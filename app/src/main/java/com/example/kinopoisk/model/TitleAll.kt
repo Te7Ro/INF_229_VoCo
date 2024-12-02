@@ -51,7 +51,7 @@ fun TitleAll(type: String, navController: NavHostController){
     }
 }
 @Composable
-fun TitleNum(title: String){
+fun TitleNum(title: String, num: Int){
     Row (modifier = Modifier.fillMaxWidth()
         .padding(vertical = 12.dp)
         .padding(end = 26.dp),
@@ -70,7 +70,7 @@ fun TitleNum(title: String){
         Text(
             modifier = Modifier.clickable {
             },
-            text = "27 >",
+            text = num.toString()+" >",
             fontSize = 14.sp,
             color = Color(0xFF3D3BFF)
         )

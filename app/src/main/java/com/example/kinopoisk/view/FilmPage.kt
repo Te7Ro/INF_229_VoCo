@@ -60,9 +60,9 @@ fun FilmPage(
                     ) {
                         items(1){
                             FilmDescriptionView()
-                            TitleNum("Galery")
+                            TitleNum("Galery",27)
                             GaleryView()
-                            TitleNum("Гей порнография")
+                            TitleNum("Гей порнография",27)
                             ActorRow()
 
                         }
