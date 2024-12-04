@@ -54,7 +54,7 @@ fun ActorCard() {
                 .padding(vertical = 4.dp)
         ) {
             Text(
-                text = "Rober Daun",
+                text = "Rober Dauni",
             )
             Text(
                 text = "Cheloverk Stal' ",
