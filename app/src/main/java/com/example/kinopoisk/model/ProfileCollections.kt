@@ -20,16 +20,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,35 +34,59 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kinopoisk.data.ProfileCollectionCard
 import com.example.kinopoisk.R
-import com.example.kinopoisk.data.ProfileViewModel
+import com.example.kinopoisk.database.ProfileViewModel
+import com.example.kinopoisk.di.Resource
+
 
 @Composable
-fun ProfileCollections(viewModel: ProfileViewModel = viewModel()){
+fun ProfileCollections(
+    viewModel: ProfileViewModel = hiltViewModel()
+){
+    val state by viewModel.likedFilms.collectAsState()
+
+    val cardFav = ProfileCollectionCard(
+        title = "Избранное",
+        icon = R.drawable.favourite_icon,
+        films = emptyList()
+    )
+    val cardCus = ProfileCollectionCard(
+        title = "Русское кино",
+        icon = R.drawable.custom_icon,
+        films = emptyList()
+    )
+    val items = mutableListOf(cardFav,cardCus)
+    val cardLiked : ProfileCollectionCard
+
+    when(state){
+        is Resource.Loading -> {
+            CircularProgressIndicator()
+        }
+        is Resource.Empty -> {
+            cardLiked = ProfileCollectionCard(
+                title = "Любимые",
+                icon = R.drawable.liked_icon,
+                films = emptyList()
+            )
+            items.add(cardLiked)
+        }
+        is Resource.Success -> {
+            cardLiked = ProfileCollectionCard(
+                title = "Любимые",
+                icon = R.drawable.liked_icon,
+                films = (state as Resource.Success).data
+            )
+            items.add(cardLiked)
+        }
+        else -> {}
+    }
+
     Column(
         modifier = Modifier.fillMaxWidth().height(400.dp)
     ){
-        val likedFilms by viewModel.likedFilms.collectAsState()
-        val cardLiked = ProfileCollectionCard(
-            title = "Любимые",
-            icon = R.drawable.liked_icon,
-            films = likedFilms
-        )
-        val favFilms by viewModel.favoriteFilms.collectAsState()
-        val cardFav = ProfileCollectionCard(
-            title = "Избранное",
-            icon = R.drawable.favourite_icon,
-            films = favFilms
-        )
-        val customFilms by viewModel.customFilms.collectAsState()
-        val cardCus = ProfileCollectionCard(
-            title = "Русское кино",
-            icon = R.drawable.custom_icon,
-            films = customFilms
-        )
-        val items = mutableListOf(cardLiked,cardFav,cardCus)
         Text(
             text = "Коллекции",
             fontSize = 18.sp,

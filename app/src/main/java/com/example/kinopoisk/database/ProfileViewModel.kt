@@ -1,47 +1,33 @@
-package com.example.kinopoisk.data
+package com.example.kinopoisk.database
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kinopoisk.di.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel(private val repository: ProfileFilmRepository) : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
-    private val _watchedFilms = MutableStateFlow<List<ProfileFilm>>(emptyList())
-    val watchedFilms: StateFlow<List<ProfileFilm>> get() = _watchedFilms
+    private val _likedFilms = MutableStateFlow<Resource<List<ProfileFilm>>>(Resource.Initial)
+    val likedFilms = _likedFilms.asStateFlow()
 
-    private val _likedFilms = MutableStateFlow<List<ProfileFilm>>(emptyList())
-    val likedFilms: StateFlow<List<ProfileFilm>> get() = _likedFilms
-
-    private val _favoriteFilms = MutableStateFlow<List<ProfileFilm>>(emptyList())
-    val favoriteFilms: StateFlow<List<ProfileFilm>> get() = _favoriteFilms
-
-    private val _customFilms = MutableStateFlow<List<ProfileFilm>>(emptyList())
-    val customFilms: StateFlow<List<ProfileFilm>> get() = _customFilms
-
-    fun loadFilms(){
-        viewModelScope.launch {
-            _watchedFilms.update { repository.getFilmsByCategory("Просмотрено") }
-            _likedFilms.update { repository.getFilmsByCategory("Любимые") }
-            _favoriteFilms.update { repository.getFilmsByCategory("Посмотреть") }
-            _customFilms.update { repository.getFilmsByCategory("Свои") }
-        }
+    init {
+        fetchFilmsByCategory()
     }
 
-    fun addFilm(film: ProfileFilm){
-        viewModelScope.launch {
-            repository.addFilm(film)
-            loadFilms()
+    private fun fetchFilmsByCategory() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getFilmsByCategory("Любимые").collect { result ->
+                _likedFilms.value = result
+            }
         }
     }
-
-    fun deleteFilm(film: ProfileFilm){
-        viewModelScope.launch {
-            repository.removeFilm(film)
-            loadFilms()
-        }
-    }
-
 }

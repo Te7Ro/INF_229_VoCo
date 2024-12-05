@@ -7,10 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.kinopoisk.data.MainNavGraph
 import com.example.kinopoisk.ui.theme.KinopoiskTheme
-import com.example.kinopoisk.view.ActorPage
-import com.example.kinopoisk.view.FilmographyPage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

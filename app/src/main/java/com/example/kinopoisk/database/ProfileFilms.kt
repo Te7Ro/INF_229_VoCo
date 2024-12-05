@@ -1,4 +1,4 @@
-package com.example.kinopoisk.data
+package com.example.kinopoisk.database
 
 import androidx.room.Dao
 import androidx.room.Database
@@ -11,42 +11,25 @@ import androidx.room.Query
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.example.kinopoisk.data.MovieDetailed
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "films")
 data class ProfileFilm(
     @PrimaryKey(autoGenerate = true)val id: Int = 0,
-    val movieDetailed: String,
+    val movieId: Int,
     val category: String
 )
 
 @Dao
 interface ProfileFilmDao{
     @Query("SELECT * FROM films WHERE category = :category")
-    suspend fun getFilmsByCategory(category: String): List<ProfileFilm>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFilm(film: ProfileFilm)
-
-    @Delete
-    suspend fun deleteFilm(film: ProfileFilm)
-}
-
-class Converters {
-    @TypeConverter
-    fun fromMovieDetailed(movieDetailed: MovieDetailed): String {
-        return Gson().toJson(movieDetailed)
-    }
-
-    @TypeConverter
-    fun toMovieDetailed(json: String): MovieDetailed {
-        return Gson().fromJson(json, MovieDetailed::class.java)
-    }
+    fun getFilmsByCategory(category: String): Flow<List<ProfileFilm>>
 }
 
 @Database(entities = [ProfileFilm::class], version = 1)
-@TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class ProfileDatabase : RoomDatabase() {
     abstract fun filmDao(): ProfileFilmDao
 }
 
