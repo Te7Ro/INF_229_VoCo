@@ -16,8 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
-    private val _likedFilms = MutableStateFlow<Resource<List<ProfileFilm>>>(Resource.Initial)
-    val likedFilms = _likedFilms.asStateFlow()
+    private val _collections = MutableStateFlow<Resource<List<ProfileFilm>>>(Resource.Initial)
+    val collections = _collections.asStateFlow()
 
     init {
         fetchFilmsByCategory()
@@ -25,9 +25,14 @@ class ProfileViewModel @Inject constructor(private val repository: ProfileReposi
 
     private fun fetchFilmsByCategory() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getFilmsByCategory("Любимые").collect { result ->
-                _likedFilms.value = result
+            repository.getFilms().collect { result ->
+                _collections.value = result
             }
+        }
+    }
+    fun insertFilm(profileFilm: ProfileFilm) {
+        viewModelScope.launch {
+            repository.insertFilm(profileFilm)
         }
     }
 }

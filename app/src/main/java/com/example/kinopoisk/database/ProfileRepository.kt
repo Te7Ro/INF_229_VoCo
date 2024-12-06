@@ -10,10 +10,10 @@ import javax.inject.Inject
 class ProfileRepository @Inject constructor(
     private val dao: ProfileFilmDao
 ) : Repository {
-    override fun getFilmsByCategory(category: String): Flow<Resource<List<ProfileFilm>>> = flow{
+    override fun getFilms(): Flow<Resource<List<ProfileFilm>>> = flow{
         emit(Resource.Loading)
         try {
-            dao.getFilmsByCategory(category).collect {
+            dao.getFilms().collect {
                 if(it.isEmpty()) {
                     emit(Resource.Empty)
                 } else {
@@ -23,12 +23,16 @@ class ProfileRepository @Inject constructor(
         } catch (throwable: Throwable){
             emit(Resource.Error(throwable))
         }
+    }
 
+    override suspend fun insertFilm(profileFilm: ProfileFilm) {
+        dao.insertFilm(profileFilm)
     }
 }
 
 
 
 interface Repository {
-    fun getFilmsByCategory(category: String) : Flow<Resource<List<ProfileFilm>>>
+    fun getFilms() : Flow<Resource<List<ProfileFilm>>>
+    suspend fun insertFilm(profileFilm: ProfileFilm)
 }

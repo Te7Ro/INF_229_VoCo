@@ -24,8 +24,11 @@ data class ProfileFilm(
 
 @Dao
 interface ProfileFilmDao{
-    @Query("SELECT * FROM films WHERE category = :category")
-    fun getFilmsByCategory(category: String): Flow<List<ProfileFilm>>
+    @Query("SELECT * FROM films")
+    fun getFilms(): Flow<List<ProfileFilm>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertFilm(profileFilm: ProfileFilm)
 }
 
 @Database(entities = [ProfileFilm::class], version = 1)
