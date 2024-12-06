@@ -81,8 +81,11 @@ fun ProfileCollections(
             val listOfCollection = (state as Resource.Success).data
 
             for(films in listOfCollection){
-                map[films.category] = mutableListOf()
-                val list : MutableList<Int> = map.getValue(films.category)
+                val list : MutableList<Int>
+                if(map.contains(films.category)){
+                    list = map.getValue(films.category)
+                }
+                else list = mutableListOf()
                 list.add(films.movieId)
                 map[films.category] = list
             }
